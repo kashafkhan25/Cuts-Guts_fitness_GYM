@@ -1,0 +1,656 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cuts &amp; Guts Fitness Gym | Elite Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        .glass-card {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow-hover:hover {
+            box-shadow: 0 0 25px rgba(155, 217, 0, 0.35);
+            border-color: #9bd900;
+            transform: translateY(-8px);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9bd900;
+        }
+
+        /* Motion Classes */
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes btn-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(155, 217, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(155, 217, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(155, 217, 0, 0); }
+        }
+        .animate-pulse-glow {
+            animation: btn-pulse 2s infinite;
+        }
+
+        #mouse-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(155, 217, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#9bd900",
+                    "on-primary-container": "#4d6e00",
+                    "primary-container": "#b1f800",
+                    "surface-container": "#201f1f",
+                    "on-tertiary": "#313030",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "surface": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed": "#e5e2e1",
+                    "primary-fixed-dim": "#9bd900",
+                    "secondary-fixed": "#e4e3d7",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-dim": "#131313",
+                    "text-muted": "#B0B0B0",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "surface-bright": "#3a3939",
+                    "primary": "#ffffff",
+                    "secondary": "#c7c7bc",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#303129",
+                    "glass-border": "rgba(255, 255, 255, 0.1)",
+                    "on-surface-variant": "#c2caad",
+                    "outline-variant": "#424a33",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-fixed-variant": "#46473f",
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "tertiary-container": "#e5e2e1",
+                    "on-background": "#e5e2e1",
+                    "tertiary": "#ffffff",
+                    "outline": "#8c9479",
+                    "primary-fixed": "#b1f800",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "secondary-container": "#494a41",
+                    "on-primary": "#243600",
+                    "on-primary-fixed-variant": "#354e00",
+                    "on-secondary-fixed": "#1b1c15",
+                    "surface-variant": "#353534",
+                    "secondary-fixed-dim": "#c7c7bc",
+                    "on-tertiary-container": "#656464",
+                    "inverse-primary": "#486800",
+                    "surface-elevated": "#1A1A1A",
+                    "on-secondary-container": "#b9b9ae",
+                    "on-primary-fixed": "#131f00",
+                    "neon-glow": "rgba(182, 255, 0, 0.4)"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-sm": "12px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "stack-md": "32px",
+                    "stack-lg": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "headline-md": ["Bebas Neue"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Bebas Neue"],
+                    "headline-xl": ["Bebas Neue"],
+                    "caption": ["Inter"],
+                    "headline-xl-mobile": ["Bebas Neue"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-xl-mobile": ["36px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-surface-tint selection:text-surface">
+<div class="opacity-0 lg:opacity-100" id="mouse-glow" style="left: 1243px; top: 2903px;"></div>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-glass-border shadow-2xl shadow-neon-glow/10">
+<nav class="flex justify-between items-center h-20 px-margin-mobile md:px-stack-lg max-w-container-max mx-auto">
+<div class="flex flex-col items-center gap-1"><div class="h-12 flex items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxphp1MOEpU2BgAL6TtqlZoyOxtBtZb3Ms5po0r-KhXa43kDR55Mkcz8Bt_q_icQaLY-dXAsQ6V-BWlQ9BWJz4g7mjDXMg8DOH9Y5bSrUp4DPyxaF0SypHlwW_sjhNKcmozmn4GUjSuluAOvzOLZHDZMq0fULiuDjjq78XmrC2A20hSpjljwKw72l1fQ2q3rjE9hJFFyK9flnEEHyUxaG8K6TBIwTUqD777c3x4lVC0vb-GLSk4OPQiZ7vMCRvPWkx_2Rp3rdbf7Yn" alt="Cuts &amp; Guts Logo" class="h-full w-auto object-contain"></div><span class="font-headline-md text-surface-tint font-bold uppercase tracking-wider">CUTS &amp; GUTS</span></div>
+<div class="hidden md:flex items-center gap-stack-md">
+<a class="font-label-bold text-label-bold text-on-surface hover:text-surface-tint transition-colors" href="contact.html">Home</a>
+<a class="font-label-bold text-label-bold text-on-surface hover:text-surface-tint transition-colors" href="program.html">Programs</a>
+<a class="font-label-bold text-label-bold text-surface-tint border-b-2 border-surface-tint pb-1" href="home.html">Contact</a>
+</div>
+<button class="bg-surface-tint text-on-primary-fixed px-6 py-2 font-label-bold text-label-bold hover:opacity-80 transition-all duration-300 active:scale-95 animate-pulse-glow">
+                Join Now
+            </button>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface hover:text-surface-tint transition-colors p-2" id="mobile-menu-btn" onclick="toggleMobileMenu()">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</nav>
+<!-- Mobile Menu -->
+<div class="md:hidden hidden bg-surface-container border-b border-glass-border" id="mobile-menu">
+<div class="flex flex-col p-4 gap-4">
+<a class="font-label-bold text-label-bold text-on-surface hover:text-surface-tint transition-colors py-2" href="contact.html">Home</a>
+<a class="font-label-bold text-label-bold text-on-surface hover:text-surface-tint transition-colors py-2" href="program.html">Programs</a>
+<a class="font-label-bold text-label-bold text-surface-tint border-b-2 border-surface-tint pb-1 py-2" href="home.html">Contact</a>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen min-h-[700px] flex items-center overflow-hidden reveal-hidden reveal-visible">
+<div class="absolute inset-0 z-0">
+<img alt="Elite Athlete Training" class="w-full h-full object-cover grayscale opacity-50" data-alt="A powerful, high-contrast photograph of a professional bodybuilder performing a heavy lift in a dark, atmospheric luxury gym. The scene is dominated by deep shadows and dramatic lighting, with sharp neon green glow effects outlining the athlete's physique. The environment feels high-tech and aggressive, using a midnight black and neon green color palette to convey elite performance and intense discipline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEu-u5qMZSjSvLla41lRJeNmvzrenqoMwVgNRt0bVrYz2tToHppYlALlTLdHIDHemVTorPfDkvZvame2tGZzspBT_VPbBzfQfJIz45KdvR3qJqMWVsNR9y9WDpelcQPVxEWp5t7NT3qLHfUN-qzl-sZhAnZ9PaktJzYRBpJk_g3TboJosmIeGgGNLyxN8_adcqJFXEHz7LZoPYkikwAlbBVNP9Q_DNXZekYG-EmqxptPNL66fy8gjltssu9Yler2n52y2yHEj62RJI">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 px-margin-mobile md:px-stack-lg max-w-container-max mx-auto w-full">
+<div class="flex flex-wrap gap-stack-sm mb-stack-md">
+<span class="glass-card px-4 py-1 rounded-full text-surface-tint font-label-bold text-caption flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.6 Rating
+                    </span>
+<span class="glass-card px-4 py-1 rounded-full text-on-surface font-label-bold text-caption flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">reviews</span> 41 Reviews
+                    </span>
+<span class="glass-card px-4 py-1 rounded-full text-on-surface font-label-bold text-caption flex items-center gap-2"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: &quot;FILL&quot; 1;">location_on</span> C9R3+X9Q Front of Prime Sports, near Allied Bank Upper Story Doctor Pharmacy, Mian Channu, Pakistan</span>
+</div>
+<h1 class="font-display-lg text-[60px] md:text-display-lg leading-tight md:leading-none mb-4 max-w-3xl">
+                    JOIN THE <span class="text-surface-tint shadow-neon-glow">FITNESS</span> LEGENDS
+                </h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-xl mb-stack-md">
+                    Experience elite-level training at Mian Channu's premier fitness destination. We combine world-class equipment with professional guidance to sculpt the version of yourself you've always dreamed of.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-surface-tint text-on-primary-fixed px-10 py-4 font-label-bold text-label-bold hover:shadow-[0_0_20px_#9bd90066] transition-all animate-pulse-glow">
+                        JOIN NOW
+                    </button>
+<button class="border border-primary text-primary px-10 py-4 font-label-bold text-label-bold hover:bg-primary/10 transition-all">
+                        CALL NOW
+                    </button>
+</div>
+</div>
+</section>
+<!-- Marquee Section -->
+<div class="py-stack-md bg-surface-container-lowest border-y border-glass-border overflow-hidden">
+<div class="animate-marquee whitespace-nowrap">
+<div class="flex items-center gap-12 font-headline-xl text-headline-xl text-stroke uppercase">
+<span class="">CUTS &amp; GUTS</span> <span class="text-surface-tint">•</span>
+<span class="">FITNESS</span> <span class="text-surface-tint">•</span>
+<span class="">STRENGTH</span> <span class="text-surface-tint">•</span>
+<span class="">POWER</span> <span class="text-surface-tint">•</span>
+<span class="">BODYBUILDING</span> <span class="text-surface-tint">•</span>
+<span class="">TRANSFORMATION</span> <span class="text-surface-tint">•</span>
+</div>
+<div class="flex items-center gap-12 font-headline-xl text-headline-xl text-stroke uppercase">
+<span class="">CUTS &amp; GUTS</span> <span class="text-surface-tint">•</span>
+<span class="">FITNESS</span> <span class="text-surface-tint">•</span>
+<span class="">STRENGTH</span> <span class="text-surface-tint">•</span>
+<span class="">POWER</span> <span class="text-surface-tint">•</span>
+<span class="">BODYBUILDING</span> <span class="text-surface-tint">•</span>
+<span class="">TRANSFORMATION</span> <span class="text-surface-tint">•</span>
+</div>
+</div>
+</div>
+<!-- About Section -->
+<section class="py-stack-lg px-margin-mobile md:px-stack-lg max-w-container-max mx-auto reveal-hidden reveal-visible">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
+<div class="relative group">
+<div class="absolute -inset-4 border border-surface-tint/20 group-hover:border-surface-tint/50 transition-all duration-500"></div>
+<img alt="Premium Gym Interior" class="w-full h-[500px] object-cover relative z-10 grayscale brightness-75" data-alt="A wide-angle, cinematic view of a luxury gym interior in Mian Channu featuring rows of sleek black strength training equipment. The space is illuminated with strategic neon green LED strips along the ceiling and floor, creating a futuristic high-performance atmosphere. The floor is dark rubberized material, reflecting the cold white and neon green lights, emphasizing a clean and premium environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD35-9s8hBBoxeUfKR13tfWq7CqtScXCKuh5OOILtho3SA7CGlZRx-0Kpq8x7-Xykty41FcGfgis3YtKyjwXRSOD69psQ3_qKqnO1XsF5XDBVFPQzrsZcjsvQFXQ8p-l8hKA8eZ4fk1fa7wqoEPuoknsysi2g3Vd9SnD7DHu84uMpsd6PkL5r2n-VjJzapnuq7MoDoFl8LjUlGYH_sE9pcksSnKaCU81Pg78QGz-2d2zUpqmb1sZi57eaL7SRchXBr_7mB-qdhQInxO">
+</div>
+<div class="space-y-6">
+<span class="text-surface-tint font-label-bold text-label-bold uppercase tracking-[0.2em]">Our Heritage</span>
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl">A LEADING FITNESS HUB IN MIAN CHANNU</h2>
+<p class="font-body-md text-body-md text-text-muted">
+                        At Cuts &amp; Guts, we don't just provide a gym; we provide a high-performance ecosystem. Our facility represents the pinnacle of fitness in Mian Channu, designed for those who demand more from their bodies and their training environment.
+                    </p>
+<p class="font-body-md text-body-md text-text-muted">
+                        Founded on the principles of discipline and scientific training, we offer a sanctuary where elite athletes and fitness enthusiasts alike can push past their perceived limits.
+                    </p>
+<div class="pt-4">
+<a class="inline-flex items-center gap-2 text-surface-tint font-label-bold text-label-bold hover:underline" href="#">
+                            DISCOVER OUR STORY <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="py-stack-lg bg-surface-container-low reveal-hidden reveal-visible">
+<div class="px-margin-mobile md:px-stack-lg max-w-container-max mx-auto">
+<div class="text-center mb-stack-lg">
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl mb-4">THE ELITE ADVANTAGE</h2>
+<div class="w-20 h-1 bg-surface-tint mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Feature Cards -->
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<h3 class="font-headline-md text-headline-md mb-2">ELITE EQUIPMENT</h3>
+<p class="font-body-md text-body-md text-text-muted">Precision-engineered strength and cardio machines for optimal muscle engagement.</p>
+</div>
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h3 class="font-headline-md text-headline-md mb-2">EXPERT GUIDANCE</h3>
+<p class="font-body-md text-body-md text-text-muted">Certified trainers dedicated to personalizing your journey toward peak performance.</p>
+</div>
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">payments</span>
+<h3 class="font-headline-md text-headline-md mb-2">AFFORDABLE ELITE</h3>
+<p class="font-body-md text-body-md text-text-muted">Luxury training experience at competitive membership rates in Mian Channu.</p>
+</div>
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+<h3 class="font-headline-md text-headline-md mb-2">PREMIUM ENVIRONMENT</h3>
+<p class="font-body-md text-body-md text-text-muted">High-energy atmosphere with advanced climate control and premium acoustics.</p>
+</div>
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<h3 class="font-headline-md text-headline-md mb-2">FLEXIBLE HOURS</h3>
+<p class="font-body-md text-body-md text-text-muted">Train on your schedule with extended hours designed for the busy professional.</p>
+</div>
+<div class="glass-card p-8 neon-glow-hover transition-all duration-300 group reveal-hidden reveal-visible">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<h3 class="font-headline-md text-headline-md mb-2">PROVEN RESULTS</h3>
+<p class="font-body-md text-body-md text-text-muted">Join thousands of successful members who have transformed their lives with us.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Programs Preview -->
+<section class="py-stack-lg px-margin-mobile md:px-stack-lg max-w-container-max mx-auto reveal-hidden reveal-visible">
+<div class="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-4">
+<div>
+<span class="text-surface-tint font-label-bold text-label-bold uppercase tracking-[0.2em]">Our Specializations</span>
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl mt-2">TRAINING ARCHITECTURES</h2>
+</div>
+<a class="text-primary font-label-bold text-label-bold hover:text-surface-tint transition-colors" href="#">VIEW ALL PROGRAMS</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Program Cards -->
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="Weight Loss Program" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A dynamic, high-energy photo of a person performing intense cardio and weight loss exercises. The setting is a dark luxury gym with neon green lighting highlights. The image style is sharp, focused, and high-contrast black and neon green, emphasizing metabolic burn and determination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuamIByxeJ8Z_rkIN7i5hNIW7Th_cwLPMrN7bL3S-VNkvue1lkkpsDxqdTjo_m0jLUTjA-3-zobRFfL1LlgB4XvI1SEwwf7ILdZ9acKu3buxY3R3f5C5W4hY2wijIhVlcfjlSl-4S07JQ-8HHgkwCDERL1Lyg5vVNKyrWIjgsdkQc5mcU1c1d1oAuHd6YnNIVZd59c-1PkwwoYQzwMbox6eOpAK_azC2wr-c8VS_ENXJ1bk6LMTVsl0LVkv1JRuE7M-zA4POFYoaQ5">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">WEIGHT LOSS</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">FAT BURNING FOCUS</p>
+</div>
+</div>
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="Muscle Building" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close-up of a muscular person lifting heavy weights in a dark gym environment. High-contrast lighting captures muscle definition and sweat. Dramatic neon green accents from overhead lighting cast sharp shadows. Luxury midnight aesthetic, professional athletic photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSPf0K75fLxRQY4WSZgGc2C5Z2MbWkEDyYTfM7XL-6BvMdhVadUqba1JG1gwMVGkAHCZkKX15egNGa-lzW9lMhHRGZ2GK0Z4GNjA1eZNFtKquagtNXUb0S5ZmJTNYaJkoVdL4npcdhnUDGJwgQULLwK5i-gesQrNLUPXssxo4IeoVH7gQ8yfjDQlM4AWCcYfDkjkGK11Csv0FDp0ZzRqs_YRT6zkpr-Jo8-OHoS7SmzGpXCCIxEmaoql2cSmil1-caQKECniy_2Ium">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">MUSCLE BUILDING</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">HYPERTROPHY SPECIFIC</p>
+</div>
+</div>
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="Strength Training" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Athlete preparing for a heavy powerlifting move in a dark gym with raw concrete textures and neon green highlights. The image is gritty, professional, and focuses on raw power and strength. Dark luxury aesthetic with high-contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAitj3frWktR5JtynrCizuysucfqfAzFsey7caGDytggLHb99KUcfrL5tfqHpSWGVkUo6PgBm3LUOXoYZqSZec3LNTr2lwboPES64ITkmTO4Zt34naXg9QiyyvxhQ5woRueRJ3pu476bqUpMd8v39BfssgRtfbMaUSBdmeEi6Scxi8POBESLSOkCfcQ8MA8LM-KZD2OPirnHxVoiRKCcfOddgMPA1BpWLW7XTs9eLmctdKgWcKtKUoE1sdt3GwrzmH3pIPJJ8ShOd3m">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">STRENGTH</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">POWER &amp; RESILIENCE</p>
+</div>
+</div>
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="Cardio Elite" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A person running on a high-end treadmill in a darkened gym space illuminated by neon green vertical light strips. High-contrast athletic photography, feeling fast-paced and high-performance. Midnight black and neon green color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA32fh-fPVGbs3I4YIwu3AbE-cvynshYzv3kM_4VAn6fXgPDL7s3ADuTS_IT7-V-k_wshnkOvonVdGVmAnYbrRYXRSvTNBEeB_sJj-S9-rNL84JFTadR1UVxNs4JGNZKvcrV0iczZWh6GHWg7VLyu9IccuKeCr4VbNTesvzVHz8VWTA4Nqg2bpe60Z6p1EC1qCQvSURd-65-gvNvf5i5OnLUa_hDE5XIfsziE8LZrO-mSehyQHGZfec-8rqvyObsfVdQPPSL1SkJ7eE">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">CARDIO</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">ENDURANCE CAPACITY</p>
+</div>
+</div>
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="Total Transformation" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Before and after aesthetic represented by a person in a dramatic, high-performance stance in a professional gym studio. High-contrast neon green lighting against deep black surfaces. Intense and motivational mood, premium quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKzLRZa00KbNrHd-wCl7vzTuI5rqFpD1x1rgTRIIBRa6PZUd89Lfi1N_CI_gQtOc5zuQwxbsRpouGVxl0wSe9sR9KA14GXPcR09AJaEo9kwiJTsbLiWDCc3-0c8GUwtzh_0qtrv1z5OI7qfhnYvcBZ0w3qbXdcriMdCJk_NZBANYJ-NrsKB-7yKSzsU-Jw9E59GP3sJlNrXCSNcELM5qYKLNybrWx97z_4qVdaj0-hOjUMpvrGDp3GaX-UtpXBZeUsE_jOkIHANFrX">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">TRANSFORMATION</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">LIFESTYLE REBOOT</p>
+</div>
+</div>
+<div class="relative overflow-hidden group h-[400px] reveal-hidden neon-glow-hover transition-all duration-300 reveal-visible">
+<img alt="General Fitness" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A clean, minimalist shot of high-end gym equipment in a luxury dark gym with subtle neon green glows. The focus is on quality and wellness. Professional fitness center atmosphere in Mian Channu, high-contrast black and neon aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAflZ6GVEU0RB2Yu2VxCsWxWVkjv1PxJaVue7ICO9Q8gGQpEt3LSmr9gdlKWRZGxJ8BilHHfRt-FqEvTEIQvvMXC8wk04xv21DDyNLNeLEnKiSm35-_Y6-HdCTyL8VU6lu8a379-s53hHm7_iYOpwMMCXPKKqjMwM23hd4_m_LiajxXdPzJ2jAe-WCsEZcEg-tL24xNBz7xDKmXc4yRTzjydZ-01yxwwVg1gnB4UqOAe77XnSsIQPxgIqaHbvyy3_BhT2wlhOSWrVOV">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<h3 class="font-headline-md text-headline-md text-white">GENERAL</h3>
+<p class="text-surface-tint font-label-bold text-caption mt-2">EVERYDAY WELLNESS</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-stack-lg bg-surface-container-lowest border-y border-glass-border reveal-hidden reveal-visible">
+<div class="px-margin-mobile md:px-stack-lg max-w-container-max mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter text-center">
+<div>
+<div class="font-display-lg text-[48px] md:text-display-lg text-surface-tint stat-counter counted" data-target="4.6">4.6+</div>
+<div class="font-label-bold text-label-bold text-on-surface tracking-widest">AVG RATING</div>
+</div>
+<div>
+<div class="font-display-lg text-[48px] md:text-display-lg text-surface-tint stat-counter counted" data-target="41">41+</div>
+<div class="font-label-bold text-label-bold text-on-surface tracking-widest">REVIEWS</div>
+</div>
+<div>
+<div class="font-display-lg text-[48px] md:text-display-lg text-surface-tint stat-counter counted" data-target="100">100+</div>
+<div class="font-label-bold text-label-bold text-on-surface tracking-widest">ACTIVE MEMBERS</div>
+</div>
+<div>
+<div class="font-display-lg text-[48px] md:text-display-lg text-surface-tint stat-counter counted" data-target="1000">1000+</div>
+<div class="font-label-bold text-label-bold text-on-surface tracking-widest">SESSIONS DONE</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-stack-lg px-margin-mobile md:px-stack-lg max-w-container-max mx-auto overflow-hidden reveal-hidden reveal-visible">
+<div class="text-center mb-stack-lg">
+<span class="text-surface-tint font-label-bold text-label-bold uppercase tracking-[0.2em]">Success Stories</span>
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl mt-2">VOICES OF THE LEGENDS</h2>
+</div>
+<div class="flex gap-gutter" id="testimonial-slider">
+<!-- Testimonials content remains identical -->
+<div class="glass-card p-8 min-w-[320px] md:min-w-[400px] flex-shrink-0">
+<div class="flex gap-1 mb-4">
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<p class="font-body-md text-body-md text-text-muted mb-6">"The atmosphere here is unmatched in Mian Channu. Every session feels like I'm training with professionals. The equipment is top-tier."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-glass-border flex items-center justify-center font-label-bold">AZ</div>
+<div>
+<div class="font-label-bold text-label-bold">Ahmed Zafar</div>
+<div class="text-caption text-text-muted">Active Member</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 min-w-[320px] md:min-w-[400px] flex-shrink-0">
+<div class="flex gap-1 mb-4">
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-text-muted mb-6">"Finally found a gym that takes fitness seriously. Trainers are very knowledgeable and helpful. Highly recommend Cuts &amp; Guts!"</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-glass-border flex items-center justify-center font-label-bold">SK</div>
+<div>
+<div class="font-label-bold text-label-bold">Salman Khan</div>
+<div class="text-caption text-text-muted">Fitness Enthusiast</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 min-w-[320px] md:min-w-[400px] flex-shrink-0">
+<div class="flex gap-1 mb-4">
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-text-muted mb-6">"The best decision for my physical health. The facility is extremely clean and the environment is very professional and motivating."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-glass-border flex items-center justify-center font-label-bold">MU</div>
+<div>
+<div class="font-label-bold text-label-bold">M. Usman</div>
+<div class="text-caption text-text-muted">Long-term Member</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-stack-lg px-margin-mobile md:px-stack-lg reveal-hidden reveal-visible">
+<div class="max-w-container-max mx-auto relative overflow-hidden bg-surface-container py-24 px-12 text-center group">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(155,217,0,0.1)_0%,transparent_70%)]"></div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-[48px] md:text-[64px] mb-8">READY TO TRANSFORM YOUR BODY?</h2>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-surface-tint text-on-primary-fixed px-12 py-5 font-label-bold text-label-bold hover:shadow-[0_0_30px_#9bd90088] transition-all animate-pulse-glow">
+                            JOIN THE SQUAD
+                        </button>
+<button class="border border-white text-white px-12 py-5 font-label-bold text-label-bold hover:bg-white/10 transition-all">
+                            VISIT FACILITY
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg border-t border-glass-border bg-surface-container-lowest reveal-hidden reveal-visible">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-stack-lg max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="flex flex-col items-start gap-1 mb-4"><div class="h-20 flex items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxphp1MOEpU2BgAL6TtqlZoyOxtBtZb3Ms5po0r-KhXa43kDR55Mkcz8Bt_q_icQaLY-dXAsQ6V-BWlQ9BWJz4g7mjDXMg8DOH9Y5bSrUp4DPyxaF0SypHlwW_sjhNKcmozmn4GUjSuluAOvzOLZHDZMq0fULiuDjjq78XmrC2A20hSpjljwKw72l1fQ2q3rjE9hJFFyK9flnEEHyUxaG8K6TBIwTUqD777c3x4lVC0vb-GLSk4OPQiZ7vMCRvPWkx_2Rp3rdbf7Yn" alt="Cuts &amp; Guts Logo" class="h-full w-auto object-contain"></div><span class="font-headline-md text-surface-tint font-bold uppercase tracking-wider">CUTS &amp; GUTS</span></div>
+<p class="font-body-md text-body-md text-text-muted max-w-sm">
+                    Empowering the legends of Mian Channu through elite fitness and professional discipline. Join the movement.
+                </p>
+</div>
+<div>
+<h4 class="font-label-bold text-label-bold text-surface-tint mb-6 uppercase tracking-wider">Contact Us</h4>
+<ul class="space-y-4">
+<li class="font-body-md text-body-md text-on-surface">Phone: 0305 7789129</li>
+<li class="font-body-md text-body-md text-on-surface">Location: C9R3+X9Q Front of Prime Sports, near Allied Bank Upper Story Doctor Pharmacy, Mian Channu, Pakistan</li>
+<li class="font-body-md text-body-md text-on-surface">Rating: 4.6 Stars</li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-bold text-label-bold text-surface-tint mb-6 uppercase tracking-wider">Legal</h4>
+<ul class="space-y-4">
+<li class="font-body-md text-body-md text-text-muted hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
+<li class="font-body-md text-body-md text-text-muted hover:text-primary transition-colors cursor-pointer">Location: C9R3+X9Q Front of Prime Sports, near Allied Bank Upper Story Doctor Pharmacy, Mian Channu, Pakistan</li>
+</ul>
+</div>
+</div>
+<div class="mt-stack-lg pt-stack-md border-t border-glass-border px-margin-mobile md:px-stack-lg max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-text-muted">© 2024 Cuts &amp; Guts Fitness Gym. Elite Performance Guaranteed.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-text-muted hover:text-surface-tint cursor-pointer transition-colors">face_nod</span>
+<span class="material-symbols-outlined text-text-muted hover:text-surface-tint cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-text-muted hover:text-surface-tint cursor-pointer transition-colors">location_on</span>
+</div>
+</div>
+</footer>
+<script>
+    // Reveal Animations using Intersection Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-hidden').forEach(el => revealObserver.observe(el));
+
+    // Stats Counter Animation
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                animateCounter(entry.target);
+                entry.target.classList.add('counted');
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-counter').forEach(el => statsObserver.observe(el));
+
+    function animateCounter(el) {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const isFloat = el.getAttribute('data-target').includes('.');
+        let count = 0;
+        const duration = 2000;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            
+            const currentCount = easeProgress * target;
+            el.innerText = isFloat ? currentCount.toFixed(1) + '+' : Math.floor(currentCount) + '+';
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = target + (isFloat ? '+' : '+');
+            }
+        }
+        requestAnimationFrame(update);
+    }
+
+    // Mouse Glow Effect
+    const glow = document.getElementById('mouse-glow');
+    document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+    });
+
+    // Simple auto-scroll for testimonials
+    const slider = document.getElementById('testimonial-slider');
+    let scrollAmount = 0;
+    const step = 0.8;
+    
+    function autoScroll() {
+        if (slider) {
+            slider.scrollLeft += step;
+            if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
+                slider.scrollLeft = 0;
+            }
+        }
+    }
+    
+    let scrollInterval = setInterval(autoScroll, 30);
+    slider.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+    slider.addEventListener('mouseleave', () => scrollInterval = setInterval(autoScroll, 30));
+
+    // Interaction for buttons
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+        btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+        btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const btn = document.getElementById('mobile-menu-btn');
+        menu.classList.toggle('hidden');
+        btn.querySelector('span').textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+    }
+</script>
+
+
+
+
+<!--
+# RESPONSIVE DESIGN SPECIFICATIONS
+Design mobile-first but optimize for all modern devices.
+The website must be fully responsive across all screen sizes with no horizontal scrolling, layout breaks, overlapping elements, or content overflow.
+## BREAKPOINTS
+### Mobile Small: 320px – 375px (iPhone SE, Older Android)
+- Single column, Full-width cards, Full-width buttons, Reduced spacing
+### Mobile Standard: 376px – 480px (iPhone 13/14/15, Samsung Galaxy)
+- Single column, Optimized touch targets, Responsive typography
+### Tablet Portrait: 481px – 768px (iPad Mini, Galaxy Tab)
+- 2-column grids, Larger spacing
+### Tablet Landscape: 769px – 1024px (iPad Pro)
+- 2 to 3 columns, Enhanced animations
+### Laptop: 1025px – 1440px (MacBook Air)
+- Full desktop design, Maximum visual effects
+### Desktop Large: 1441px – 1920px (Full HD Monitors)
+- Wider containers, Larger typography
+### Ultra-Wide: 1921px – 2560px+ (2K/4K Displays)
+- Content centered, Maximum container width
+## CONTAINER WIDTHS
+- Mobile: 100%, Tablet: 90%, Laptop: 1280px, Desktop: 1440px, Ultra-Wide: 1600px
+## HERO SECTION
+- Desktop: 50% Content/50% Image at 100vh
+- Tablet: 55% Content/45% Image at 90vh
+- Mobile: 100% Content, Image below at 80vh
+## GRID SYSTEM
+- Desktop: 12 cols, Tablet: 8 cols, Mobile: 4 cols
+## CARD LAYOUTS
+- Why Choose Us: 3×2 (D), 2×3 (T), 1 (M)
+- Programs: 3 (D), 2 (T), 1 (M)
+- Testimonials: 3 (D), 2 (T), 1 slider (M)
+- Gallery: 4 col masonry (D), 2 (T), 1 (M)
+- Membership: 3 side-by-side (D), 2+1 (T), stacked (M)
+## TYPOGRAPHY
+- Hero: 80-110px (D), 60-80px (T), 40-56px (M)
+- Section: 48-64px (D), 40-48px (T), 32-40px (M)
+- Body: 18-20px (D), 16-18px (T), 14-16px (M)
+## SPACING
+- Section padding: 120px (D), 80px (T), 60px (M)
+## ANIMATIONS
+- Desktop: Full GSAP, Tablet: Medium, Mobile: Optimized lightweight
+--></body></html>
