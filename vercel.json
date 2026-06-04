@@ -1,0 +1,9 @@
+
+{
+  "rewrites": [
+    { "source": "/", "destination": "/frontend/home.html" },
+    { "source": "/program", "destination": "/frontend/program.html" },
+    { "source": "/contact", "destination": "/frontend/contact.html" },
+    { "source": "/(.*)", "destination": "/frontend/home.html" }
+  ]
+}
